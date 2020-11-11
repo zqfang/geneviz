@@ -323,7 +323,7 @@ class FeatureTrack(Track):
             xycoords='data',
             xytext=(-5, 0),
             textcoords='offset points',
-            s=label,
+            text=label,
             horizontalalignment='right',
             verticalalignment='center',
             clip_on=True,
@@ -401,7 +401,7 @@ def _stack(data, label=None, label_func=None, ax=None, spacing=0.05):
         data = _augment_with_labels(data, label, label_func, ax)
 
     levels, level_heights = _pack_ffdh(data.itertuples())
-
+    print(level_heights)
     level_offsets = np.cumsum(level_heights, dtype=np.float) - level_heights[0]
     level_offsets += np.arange(1, len(level_offsets) + 1) * spacing
 
