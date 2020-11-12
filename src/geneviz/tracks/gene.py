@@ -299,7 +299,7 @@ class BiomartTrack(_BaseGeneTrack):
         # Retrieve exons for these transcripts.
         attrs = [
             self._bm_gene_name, 'ensembl_gene_id', 'ensembl_transcript_id',
-            'exon_chrom_start', 'exon_chrom_end', 'strand'
+            'exon_chrom_start', 'exon_chrom_end', 'strand', 'transcript_biotype'
         ]
 
         data = self._dataset.query(
@@ -318,7 +318,9 @@ class BiomartTrack(_BaseGeneTrack):
             'strand': data['strand'],
             'gene_name': data[self._bm_gene_name],
             'gene_id': data['ensembl_gene_id'],
-            'transcript_id': data['ensembl_transcript_id']
+            'transcript_id': data['ensembl_transcript_id'],
+            'biotype':data['transcript_biotype']
         })
 
-        return data
+        # only get protein_coding
+        return data.query("biotype == 'protein_coding'")

@@ -184,8 +184,9 @@ def plot_tracks(tracks,
             lab.set_visible(False)
     else:
         for ax in axes[:-1]:
-            for lab in ax.get_xticklabels():
-                lab.set_visible(False)
+            ax.tick_params(axis='both', which='both', length=0)
+            #for lab in ax.get_xticklabels():
+            #    lab.set_visible(False)
 
     # Turn off scientific notation on axes.
     axes[0].xaxis.get_major_formatter().set_useOffset(False)
@@ -195,7 +196,7 @@ def plot_tracks(tracks,
         # Adjust spines and labels for more white space.
         _despine_axes(axes, tick_top)
 
-    return fig
+    return fig, axes
 
 
 def _calc_height_ratios(tracks, region, figsize, reverse):
